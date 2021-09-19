@@ -2,8 +2,8 @@
   "name": "@petr-ptacek/vue3-playground",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "dev": "vite -m development",
+    "build": "vue-tsc --noEmit && vite build -m production",
     "serve": "vite preview"
   },
   "dependencies": {

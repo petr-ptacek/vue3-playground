@@ -1,11 +1,10 @@
 <template>
-  <CardsDashboard />
+  <AppHeader />
 </template>
 
 <script setup
         lang="ts">
 
-import CardsDashboard from '@/components/CardsDashboard.vue';
 </script>
 
 <style>

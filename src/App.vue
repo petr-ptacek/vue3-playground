@@ -1,10 +1,34 @@
 <template>
-  <AppHeader />
+  <AppLayout />
 </template>
 
-<script setup
-        lang="ts">
+<script lang="ts">
+import { computed, defineComponent } from 'vue';
+import AppLayout                     from '@/components/AppLayout.vue';
 
+export default defineComponent({
+  name: 'App',
+  data() {
+    return {
+      state: {
+        users: [
+          'Joe Doe'
+        ]
+      }
+    };
+  },
+  created(): void {
+    setTimeout(() => this.state.users.push('Petr Ptacek'), 5000);
+  },
+  provide() {
+    return {
+      users: computed(() => this.state.users)
+    };
+  },
+  components: {
+    AppLayout
+  }
+});
 </script>
 
 <style>

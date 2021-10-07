@@ -1,0 +1,13 @@
+<template>
+  <div>
+    Footer
+  </div>
+</template>
+
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'AppFooter'
+});
+</script>

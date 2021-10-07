@@ -1,3 +1,9 @@
+<template>
+  <header class="app-header">
+    {{ message }}
+  </header>
+</template>
+
 <script lang="ts">
 import type {
   Ref,
@@ -20,19 +26,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<template>
-  <header class="app-header">
-    {{ message }}
-  </header>
-</template>
-
-
-<style scoped>
-.app-header {
-  color: #fff;
-  font-size: 3rem;
-  background-color: #212121;
-  padding: 1rem 2rem;
-}
-</style>

@@ -1,19 +1,12 @@
 <template>
   <div>
-    <TheInput
-      v-model:age="age"
-      v-model:name="name"
-    />
-
-    <pre>
-      {{ users }}
-    </pre>
+    <TransitionAndAnimation />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import TheInput            from '@/components/TheInput.vue';
+import { defineComponent }    from 'vue';
+import TransitionAndAnimation from '@/components/TransitionAndAnimation.vue';
 
 export default defineComponent({
   name: 'AppHeader',
@@ -25,8 +18,6 @@ export default defineComponent({
     };
   },
   methods: {},
-  components: {
-    TheInput
-  }
+  components: { TransitionAndAnimation }
 });
 </script>

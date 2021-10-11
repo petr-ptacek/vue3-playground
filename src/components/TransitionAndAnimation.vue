@@ -20,18 +20,35 @@
     <!--      </div>-->
     <!--    </transition>-->
 
-    <select v-model="activeComponent"
-            style="margin-bottom: 5rem">
-      <option :value="SquareBoxComponent">Square Box</option>
-      <option :value="CircleBoxComponent">Circle Box</option>
-    </select>
+    <!--    <select v-model="activeComponent"-->
+    <!--            style="margin-bottom: 5rem">-->
+    <!--      <option :value="SquareBoxComponent">Square Box</option>-->
+    <!--      <option :value="CircleBoxComponent">Circle Box</option>-->
+    <!--    </select>-->
 
-    <transition name="bounce"
-                appear
-                mode="out-in"
+    <!--    <transition name="bounce"-->
+    <!--                appear-->
+    <!--                mode="out-in"-->
+    <!--    >-->
+    <!--      <component :is="activeComponent" />-->
+    <!--    </transition>-->
+
+    <button @click="addItem">Add Item</button>
+    <button @click="shuffleItems">Shuffle Items</button>
+
+    <transition-group name="list"
+                      tag="p"
+                      class="list"
     >
-      <component :is="activeComponent" />
-    </transition>
+      <span v-for="(number, index) of numberItems"
+          :key="number"
+          class="list__item"
+          @click="removeItem(index)"
+      >
+        {{ number }}
+      </span>
+    </transition-group>
+
   </div>
 </template>
 
@@ -52,8 +69,52 @@ export default defineComponent({
       SquareBoxComponent,
       CircleBoxComponent: markRaw(defineAsyncComponent(
         () => import('@/components/CircleBox.vue')
-      ))
+      )),
+      numberItems: [
+        1, 2, 3
+      ]
     };
+  },
+  methods: {
+    /**
+     * @param {number} from
+     * @param {number} to
+     * @returns {number}
+     */
+    getRandomNumber(from, to) {
+      return Math.floor(Math.random() * (to - from + 1) + from);
+    },
+    /**
+     * @returns {void}
+     */
+    addItem() {
+      const index = this.getRandomNumber(0, this.numberItems.length);
+
+      while ( true ) {
+        let item = this.getRandomNumber(1, 100);
+        if ( !this.numberItems.includes(item) ) {
+          this.numberItems.splice(index, 0, item);
+          break;
+        }
+      }
+    },
+    shuffleItems() {
+      this.numberItems.sort(
+        item => {
+          const n = Math.random();
+          if ( n < 0.45 ) {
+            return -1;
+          } else if ( n > 0.45 ) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      );
+    },
+    removeItem(index) {
+      this.numberItems.splice(index, 1);
+    }
   },
   components: {}
 });
@@ -105,6 +166,33 @@ export default defineComponent({
 
 .bounce-leave-active {
   animation: bounce-in 0.6s reverse;
+}
+
+
+.list {
+  //display: flex;
+  padding: 5px;
+}
+
+.list__item:hover {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.list__item {
+  transition: all 0.8s ease;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-leave-active {
+  position: absolute;
 }
 
 @keyframes bounce-in {

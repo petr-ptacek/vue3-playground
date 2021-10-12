@@ -1,25 +1,38 @@
 <template>
   <div class="compositionApiExample">
-
+    <!--    <CounterDisplay :initial-value="0" />-->
+    <!--    <input type="text"-->
+    <!--           v-model="state.bookName"-->
+    <!--    >-->
+    <!--    <hr />-->
+    <!--    <Book :name="state.bookName" />-->
+    <SignaturePad v-model="state.canvas" />
   </div>
 </template>
 
 <script lang="ts">
 import {
-  defineComponent,
-  SetupContext
+  defineComponent
 } from 'vue';
 
-interface IEmitOptions {
-  click(message: string): void;
-
-  dblclick(message: string): void;
-}
+import Book           from '@/components/Composition/Book.vue';
+import CounterDisplay from '@/components/Composition/CounterDisplay.vue';
+import SignaturePad   from '@/components/Composition/SignaturePad.vue';
 
 export default defineComponent({
   name: 'CompositionApiExample',
-  setup(props, ctx: SetupContext<IEmitOptions>) {
-
+  data() {
+    return {
+      state: {
+        bookName: 'A Composition Api Book',
+        canvas: null
+      }
+    };
+  },
+  components: {
+    Book,
+    CounterDisplay,
+    SignaturePad
   }
 });
 </script>

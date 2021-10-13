@@ -5,14 +5,15 @@
     <!--           v-model="state.bookName"-->
     <!--    >-->
     <!--    <hr />-->
-    <!--    <Book :name="state.bookName" />-->
-    <SignaturePad v-model="state.canvas" />
+    <Book ref="book"
+          title="About mee" />
+    <!--    <SignaturePad v-model="state.canvas" />-->
   </div>
 </template>
 
 <script lang="ts">
 import {
-  defineComponent
+  defineComponent, ref
 } from 'vue';
 
 import Book           from '@/components/Composition/Book.vue';
@@ -21,13 +22,11 @@ import SignaturePad   from '@/components/Composition/SignaturePad.vue';
 
 export default defineComponent({
   name: 'CompositionApiExample',
-  data() {
-    return {
-      state: {
-        bookName: 'A Composition Api Book',
-        canvas: null
-      }
-    };
+  setup() {
+    window.navigator.mediaDevices.getUserMedia()
+
+    const book = ref<InstanceType<typeof Book>>();
+    book.value?.foo('Jak se mas');
   },
   components: {
     Book,

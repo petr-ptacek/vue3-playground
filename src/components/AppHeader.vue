@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="app-header">
     <AppNavigation />
   </header>
 </template>
@@ -13,7 +13,3 @@ export default defineComponent({
   components: { AppNavigation }
 });
 </script>
-
-<style scoped>
-
-</style>

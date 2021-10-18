@@ -1,5 +1,5 @@
 <template>
-  <section class="users">
+  <section class="users-view">
     <h1 class="users__heading">Users</h1>
 
     <div class="users__content">
@@ -30,17 +30,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped>
-.users {
-
-}
-
-.users__heading {
-  font-size: 3rem;
-}
-
-.users__content {
-  padding: 3rem;
-}
-</style>

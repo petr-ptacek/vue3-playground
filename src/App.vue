@@ -1,32 +1,24 @@
 <template>
-  <AppLayout />
+  <AppHeader />
+
+  <main>
+    <router-view />
+  </main>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
-import AppLayout                     from '@/components/AppLayout.vue';
+import {
+  defineComponent
+}                from 'vue';
+import AppHeader from '@/components/AppHeader.vue';
 
 export default defineComponent({
   name: 'App',
-  data() {
-    return {
-      state: {
-        users: [
-          'Joe Doe'
-        ]
-      }
-    };
-  },
-  created(): void {
-    setTimeout(() => this.state.users.push('Petr Ptacek'), 5000);
-  },
-  provide() {
-    return {
-      users: computed(() => this.state.users)
-    };
+  setup() {
+    return {};
   },
   components: {
-    AppLayout
+    AppHeader
   }
 });
 </script>

@@ -5,11 +5,12 @@ import {
   RouteRecordRaw
 }                               from 'vue-router';
 import Home                     from '@/views/Home.vue';
-import { defineAsyncComponent } from 'vue';
 
 enum RouteNames {
   home = 'home',
-  users = 'users'
+  users = 'users',
+  user = 'user',
+  notFound = 'notFound'
 }
 
 const routes: RouteRecordRaw[] = [
@@ -24,13 +25,27 @@ const routes: RouteRecordRaw[] = [
   {
     name: RouteNames.users,
     path: '/users',
-    component: defineAsyncComponent(
-      () => import('@/views/Users.vue')
-    ),
+    component: () => import('@/views/Users.vue'),
     meta: {
       label: 'Users'
     }
+  },
+  {
+    name: RouteNames.notFound,
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/404.vue')
+
   }
+  // {
+  //   name: RouteNames.users,
+  //   path: '/users/:id',
+  //   component: defineAsyncComponent(
+  //     () => import('@/components/User.vue')
+  //   ),
+  //   meta: {
+  //     label: 'User'
+  //   }
+  // }
 ];
 
 const routerOptions: RouterOptions = {
@@ -43,7 +58,6 @@ const router = createRouter(routerOptions);
 
 export {
   router,
-  routes,
   RouteNames
 };
 export default router;

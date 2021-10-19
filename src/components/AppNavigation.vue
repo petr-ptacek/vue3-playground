@@ -17,12 +17,19 @@
 </template>
 
 <script lang="ts">
-import { routes }          from '@/router';
 import { defineComponent } from 'vue';
+import { useRouter }       from 'vue-router';
+import { RouteNames }      from '@/router';
 
 export default defineComponent({
   name: 'AppNavigation',
   setup() {
+    const routes = useRouter()
+      .getRoutes()
+      .filter(
+        route => [RouteNames.home, RouteNames.users].includes(route.name)
+      );
+
     return {
       routes
     };

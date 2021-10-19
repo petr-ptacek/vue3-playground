@@ -1,24 +1,16 @@
 <template>
-  <AppHeader />
-
-  <main>
-    <router-view />
-  </main>
 </template>
 
 <script lang="ts">
 import {
   defineComponent
-}                from 'vue';
-import AppHeader from '@/components/AppHeader.vue';
+} from 'vue';
 
 export default defineComponent({
   name: 'App',
   setup() {
     return {};
   },
-  components: {
-    AppHeader
-  }
+  components: {}
 });
 </script>

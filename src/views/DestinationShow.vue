@@ -1,5 +1,7 @@
 <template>
-  <section class="destination">
+  <section class="destination"
+           v-if="destination"
+  >
     <h1>{{ destination.name }}</h1>
     <div class="destination-details">
       <img :src="`/images/${ destination.image }`"
@@ -10,34 +12,26 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent, reactive, toRefs } from 'vue';
-import { useRoute }                                                 from 'vue-router';
-import sourceData                                                   from '@/assets/data.json';
-import { Destination }                                              from '@/typings';
+import { defineComponent, PropType, ref } from 'vue';
+import { Destination }                    from '@/typings';
 
 export default defineComponent({
   name: 'DestinationShow',
-  setup() {
-    const route = useRoute();
-    const state: { destinationId: number, destination: Destination } = reactive({
-      destinationId: computed((): number => {
-        return +route.params.id;
-      }),
-      destination: computed((): Destination => {
-        return (sourceData.destinations as Destination[]).find(d => d.id === state.destinationId);
-      })
-    });
+  props: {
+    id: { type: Number as PropType<number>, required: true },
+    slug: { type: String as PropType<string>, required: true }
+  },
+  setup(props) {
+    const destination = ref<Destination | null>(null);
+    const fetchDestinationData = async (): Promise<void> => {
+      const response = await fetch(`https://travel-dummy-api.netlify.app/${ props.slug }`);
+      destination.value = await response.json();
+    };
 
-    // const destinationId: ComputedRef<number> = computed((): number => {
-    //   return +route.params.id;
-    // });
-    //
-    // const destination: Destination = computed(() => {
-    //   return (sourceData.destinations as Destination[]).find(d => d.id === destinationId.value);
-    // });
+    fetchDestinationData();
 
     return {
-      ...toRefs(state)
+      destination
     };
   }
 });

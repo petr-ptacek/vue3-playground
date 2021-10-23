@@ -1,23 +1,38 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/brazil">Brazil</router-link>
-    <router-link to="/hawaii">Hawaii</router-link>
-    <router-link to="/jamaica">Jamaica</router-link>
-    <router-link to="/panama">Panama</router-link>
+    <router-link id="logo" to="/">
+      Vue School Travel App
+    </router-link>
+    <router-link
+      class="nav__link"
+      v-for="destination of destinations"
+      :key="destination.id"
+      :to="{ name: 'destination.show', params: { id: destination.id, slug: destination.slug } }"
+    >
+      {{ destination.name }}
+    </router-link>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, Ref, ref } from 'vue';
+import sourceData                    from '@/assets/data.json';
+import { Destination }               from '@/typings';
 
 export default defineComponent({
-  name: 'TheNavigation'
+  name: 'TheNavigation',
+  setup() {
+    const destinations: Ref<Destination[]> = ref(JSON.parse(JSON.stringify(sourceData.destinations)));
+
+    return {
+      destinations
+    };
+  }
 });
 </script>
 
 <style lang="css">
-#nav .vue-school-active-link {
+#nav .nav__link.vue-school-active-link {
   color: red;
   border-bottom: 2px solid red;
 }

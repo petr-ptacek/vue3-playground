@@ -6,7 +6,7 @@
       <router-link
         v-for="destination of destinations"
         :key="destination.id"
-        :to="destination.slug"
+        :to="{ name: 'destination.show', params: { id: destination.id, slug: destination.slug } }"
       >
         <h2>{{ destination.name }}</h2>
         <img :src="`/images/${destination.image}`"
@@ -19,11 +19,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import sourceData               from '@/assets/data.json';
-import { Destination }          from '@/typings/shared.d.ts';
+import { Destination }          from '@/typings';
 
 export default defineComponent({
   setup() {
-    const destinations: Destination[] = ref(JSON.parse(JSON.stringify(sourceData.destinations)));
+    const destinations = ref<Destination[]>(JSON.parse(JSON.stringify(sourceData.destinations)));
 
     return {
       destinations

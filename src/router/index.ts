@@ -1,6 +1,6 @@
 import {
   createRouter,
-  createWebHistory,
+  createWebHistory, RouteLocationNormalized,
   RouteRecordRaw,
   RouterOptions
 }           from 'vue-router';
@@ -13,28 +13,14 @@ const routes: RouteRecordRaw[] = [
     component: Home
   },
   {
-    path: '/brazil',
-    name: 'Brazil',
-    component: () => import('@/views/Brazil.vue')
-  },
-  {
-    path: '/hawaii',
-    name: 'Hawaii',
-    component: () => import('@/views/Hawaii.vue')
-  },
-  {
-    path: '/jamaica',
-    name: 'Jamaica',
-    component: () => import('@/views/Jamaica.vue')
-  },
-  {
-    path: '/panama',
-    name: 'Panama',
-    component: () => import('@/views/Panama.vue')
-  },
-  {
-    path: '/destination/:id',
-    name: 'DestinationShow',
+    path: '/destination/:id/:slug',
+    name: 'destination.show',
+    props: (route: RouteLocationNormalized) => {
+      return {
+        ...route.params,
+        id: parseInt(route.params.id as string, 10)
+      };
+    },
     component: () => import('@/views/DestinationShow.vue')
   }
 ];

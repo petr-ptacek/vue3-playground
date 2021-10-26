@@ -1,0 +1,17 @@
+<template>
+  <div>
+    <h1>Not Found</h1>
+    <p>
+      Oops, we couldn't find that page, Try going
+      <router-link to="/">home</router-link>
+    </p>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'NotFound'
+});
+</script>

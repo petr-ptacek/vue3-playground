@@ -2,9 +2,9 @@
   "name": "@petr-ptacek/vue3-playground",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite -m development",
-    "build": "vue-tsc --noEmit && vite build -m production",
-    "serve": "vite preview"
+    "dev": "vite --config ./vite.config.ts -m development",
+    "build": "vue-tsc --noEmit && vite build --config ./vite.config.ts -m production",
+    "serve": "vite preview --config ./vite.config.ts"
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
@@ -19,6 +19,7 @@
     "sass": "^1.49.8",
     "typescript": "^4.5.5",
     "vite": "^2.8.4",
+    "vite-plugin-inspect": "^0.3.15",
     "vue-tsc": "^0.2.2"
   }
 }

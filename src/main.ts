@@ -1,11 +1,10 @@
 import { createApp } from 'vue';
+import '@/assets/styles/index.css';
+import { router }    from '@/router';
 import App           from '@/App.vue';
-import '@/assets/styles/main.scss';
 
 const app = createApp(App);
 
-app.config.globalProperties = {
-  MAGIC_NUMBER: 88
-};
+app.use(router)
 
 app.mount('#app');

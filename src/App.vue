@@ -1,16 +1,31 @@
 <template>
   <div id="app">
-    <UserInput @enlarge-font-size="blogFontSize += 0.1" />
-    <p :style="{ 'fontSize': blogFontSizePx }">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, veritatis.
-    </p>
+    <List
+      :items="listItems"
+      :font-size="fontSize"
+    />
+
+    <button type="submit" @click="addItem">Add item</button>
+    <hr>
+    <input type="number" min="10" max="20" v-model="fontSize">
   </div>
 </template>
 
 <script lang="ts" setup>
-import UserInput                                       from '@/components/UserInput.vue';
-import { computed, reactive, ref, watch, watchEffect } from 'vue';
+import { provide, ref } from 'vue';
+import List             from '@/components/List.vue';
 
-const blogFontSize = ref(5);
-const blogFontSizePx = computed(() => `${ blogFontSize.value }px`);
+const listItems = ref([
+  { label: '1', id: '1' },
+  { label: '2', id: '2' }
+]);
+
+const fontSize = ref(10);
+
+function addItem() {
+  listItems.value.push({
+    label: Math.floor(Math.random() * 1000).toString(),
+    id: Date.now().toString(16)
+  });
+}
 </script>
